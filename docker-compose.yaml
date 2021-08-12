@@ -2,8 +2,8 @@ version: "3.9"
 services:
   db:
     image: postgres
-    #    volumes:
-    #  - ./tmp/db:/var/lib/postgresql/data
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: qulture_challenge
