@@ -1,6 +1,6 @@
 class Company::Create
-  def initialize(name)
-    @name = name
+  def initialize(params)
+    @name = params[:name]
   end
 
   def call
