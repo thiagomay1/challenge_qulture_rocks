@@ -7,7 +7,7 @@ RSpec.describe Employee::GetByCompany do
     employee1 = create(:employee, company: company)
     employee2 = create(:employee, company: company)
     other_company_employee = create(:employee, company: other_company)
-    service = Employee::GetByCompany.new(company.id)
+    service = Employee::GetByCompany.new({ :company_id => company.id })
 
     result = service.call
 

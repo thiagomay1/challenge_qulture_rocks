@@ -1,6 +1,6 @@
 class Employee::GetByCompany
-  def initialize(company_id)
-    @company_id = company_id
+  def initialize(params)
+    @company_id = params[:company_id]
   end
 
   def call
