@@ -1,5 +1,5 @@
 class Employee < ApplicationRecord
-  acts_as_nested_set :scope => :company_id
+  acts_as_nested_set :dependent => :nullify, :scope => :company_id
 
   belongs_to :company
   validates :name, :email, presence: true

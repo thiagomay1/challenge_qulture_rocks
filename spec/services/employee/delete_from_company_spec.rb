@@ -29,4 +29,17 @@ RSpec.describe Employee::DeleteFromCompany do
     expect(Company.count).to be 2
     expect(Employee.find_by(id: to_destroy_employee.id)).to be nil
   end
+
+  it "delete only employee of company" do
+    subordinate = create(:employee, company: company)
+    to_destroy_employee.add_subordinate!(subordinate)
+    service = Employee::DeleteFromCompany.new({ :id => to_destroy_employee.id, :company_id => company.id })
+
+    service.call
+
+    expect(Employee.count).to be 2
+    expect(Employee.find_by(id: subordinate.id)).not_to be nil
+    expect(Employee.find_by(id: subordinate.id).leader).to be nil
+  end
+
 end
