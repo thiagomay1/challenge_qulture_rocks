@@ -28,4 +28,21 @@ RSpec.describe "Employees", type: :request do
     end
   end
 
+ describe "GET /employees/:employee_id/subordinates" do
+    it "returns http success" do
+      company = create(:company)
+      employee = create(:employee, company: company)
+      get "/employees/#{employee.id}/subordinates"
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+ describe "GET /employees/:employee_id/subordinates/second_tier" do
+    it "returns http success" do
+      company = create(:company)
+      employee = create(:employee, company: company)
+      get "/employees/#{employee.id}/subordinates/second_tier"
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

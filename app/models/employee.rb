@@ -6,6 +6,9 @@ class Employee < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, :format => /@/
 
+  alias_attribute :leader, :parent
+  alias_attribute :leader_id, :parent_id
+
   def add_subordinate!(subordinate)
     validate_other_company!(subordinate)
     raise Exceptions::LoopLeadership if self.ancestors.exists?(id: subordinate.id)
@@ -20,14 +23,6 @@ class Employee < ApplicationRecord
 
   def subordinates
     children
-  end
-
-  def leader
-    parent
-  end
-
-  def leader_id
-    parent_id
   end
 
   private 

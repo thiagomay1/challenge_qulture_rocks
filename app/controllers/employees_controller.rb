@@ -5,6 +5,24 @@ class EmployeesController < ApplicationController
     render json: result
   end
 
+  def second_tier_subordinates
+    service = Employee::GetSecondTierSubordinates.new(params[:employee_id])
+    result = service.call
+    render json: result  
+  end
+
+  def subordinates
+    service = Employee::GetSubordinates.new(params[:employee_id])
+    result = service.call
+    render json: result  
+  end
+
+  def peers
+    service = Employee::GetPeers.new(params[:employee_id])
+    result = service.call
+    render json: result
+  end
+
   def destroy
     Employee::DeleteFromCompany.new(delete_params).call
     render status: 200
@@ -13,12 +31,6 @@ class EmployeesController < ApplicationController
   def add_subordinate
     Employee::AddSubordinate.new(add_subordinate_params).call
     render status: 200
-  end
-
-  def peers
-    service = Employee::GetPeers.new(params[:employee_id])
-    result = service.call
-    render json: result
   end
 
   rescue_from Employee::Exceptions::LoopLeadership do |exception|
