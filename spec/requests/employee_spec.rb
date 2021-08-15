@@ -19,6 +19,15 @@ RSpec.describe "Employees", type: :request do
     end
   end
 
+  describe "POST /companies/:company_id/employees" do
+    it "returns http success" do
+      company = create(:company)
+      post "/companies/#{company.id}/employees", :params => { :name => Faker::Name.name, :email => Faker::Internet.email } 
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+
  describe "GET /employees/:employee_id/peers" do
     it "returns http success" do
       company = create(:company)
