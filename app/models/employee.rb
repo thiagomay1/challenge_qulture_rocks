@@ -26,6 +26,10 @@ class Employee < ApplicationRecord
     parent
   end
 
+  def leader_id
+    parent_id
+  end
+
   private 
   def validate_other_company!(other_employee)
     raise Exceptions::OtherCompanyEmployee if company_id != other_employee.company_id

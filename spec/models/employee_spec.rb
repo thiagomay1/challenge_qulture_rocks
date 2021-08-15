@@ -19,7 +19,7 @@ RSpec.describe Employee, type: :model do
     it 'should not allow subordinate from other company' do
       other_company = create(:company)
       other_company_employee = create(:employee, company: other_company)
-      expect { leader.add_subordinate!(other_company_employee) }.to raise_error Exceptions::OtherCompanyEmployee
+      expect { leader.add_subordinate!(other_company_employee) }.to raise_error Employee::Exceptions::OtherCompanyEmployee
       expect(leader.subordinates.count).to be 0
     end
 
@@ -45,7 +45,7 @@ RSpec.describe Employee, type: :model do
       loop_leader.add_subordinate!(leader)
       leader.add_subordinate!(subordinate)
 
-      expect { subordinate.add_subordinate!(loop_leader) }.to raise_error Exceptions::LoopLeadership
+      expect { subordinate.add_subordinate!(loop_leader) }.to raise_error Employee::Exceptions::LoopLeadership
     end
 
   end
@@ -63,7 +63,7 @@ RSpec.describe Employee, type: :model do
       other_company = create(:company)
       other_company_employee = create(:employee, company: other_company)
 
-      expect { subordinate.leader!(other_company_employee) }.to raise_error Exceptions::OtherCompanyEmployee
+      expect { subordinate.leader!(other_company_employee) }.to raise_error Employee::Exceptions::OtherCompanyEmployee
       expect(leader.subordinates.count).to be 0
     end
 
@@ -90,7 +90,7 @@ RSpec.describe Employee, type: :model do
       subordinate.leader!(leader)
       leader.leader!(loop_leader)
 
-      expect { loop_leader.leader!(subordinate) }.to raise_error Exceptions::LoopLeadership
+      expect { loop_leader.leader!(subordinate) }.to raise_error Employee::Exceptions::LoopLeadership
     end
   end
 end

@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+        errors: 
+                other_company_employee: "You are not allowed to set a leadership with other company employee."
+                loop_leadership: "You cannot set a circular leadership."
+                leader_not_found: "Leader cannot be found"
+                subordinate_not_found: "Subordinate cannot be found"
