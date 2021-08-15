@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :employees, only: [] do
     get 'peers' => 'employees#peers'
+    get 'subordinates' => 'employees#subordinates'
     put 'subordinate' => 'employees#add_subordinate'
   end
 end
