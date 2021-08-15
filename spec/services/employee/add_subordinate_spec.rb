@@ -6,17 +6,17 @@ RSpec.describe Employee::AddSubordinate do
   let!(:subordinate) { create(:employee, company: company) }
 
   it 'raises error if leader is not found' do
-    params = { :leader_id => 50, :subordinate_id => subordinate.id } 
+    params = { :employee_id => 50, :subordinate_id => subordinate.id } 
     expect { Employee::AddSubordinate.new(params).call }.to raise_error Employee::Exceptions::LeaderNotFound
   end
 
   it 'raises error if subordinate is not found' do
-    params = { :leader_id => leader.id, :subordinate_id => 50 } 
+    params = { :employee_id => leader.id, :subordinate_id => 50 } 
     expect { Employee::AddSubordinate.new(params).call }.to raise_error Employee::Exceptions::SubordinateNotFound
   end
 
   it 'should add subordiante to leader' do 
-    params = { :leader_id => leader.id, :subordinate_id => subordinate.id } 
+    params = { :employee_id => leader.id, :subordinate_id => subordinate.id } 
 
     Employee::AddSubordinate.new(params).call
 

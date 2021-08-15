@@ -4,5 +4,8 @@ Rails.application.routes.draw do
     end
   end
 
-  put 'leader/:leader_id/subordinate', to: 'employees#leader'
+  resources :employees, only: [] do
+    get 'peers' => 'employees#peers'
+    put 'subordinate' => 'employees#add_subordinate'
+  end
 end

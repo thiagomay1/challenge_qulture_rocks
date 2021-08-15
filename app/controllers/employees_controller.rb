@@ -7,11 +7,18 @@ class EmployeesController < ApplicationController
 
   def destroy
     Employee::DeleteFromCompany.new(delete_params).call
+    render status: 200
   end
 
-  def leader
-    Employee::AddSubordinate.new(leader_params).call
+  def add_subordinate
+    Employee::AddSubordinate.new(add_subordinate_params).call
     render status: 200
+  end
+
+  def peers
+    service = Employee::GetPeers.new(params[:employee_id])
+    result = service.call
+    render json: result
   end
 
   rescue_from Employee::Exceptions::LoopLeadership do |exception|
@@ -36,8 +43,8 @@ class EmployeesController < ApplicationController
     params.permit(:id, :company_id)
   end
 
-  def leader_params
-    params.permit(:leader_id, :subordinate_id)
+  def add_subordinate_params
+    params.permit(:employee_id, :subordinate_id)
   end
 
 end

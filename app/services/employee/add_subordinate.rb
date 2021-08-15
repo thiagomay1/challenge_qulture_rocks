@@ -1,7 +1,7 @@
 class Employee::AddSubordinate
   def initialize(params)
     @subordinate_id = params[:subordinate_id]
-    @leader_id = params[:leader_id]
+    @leader_id = params[:employee_id]
   end
 
   def call
