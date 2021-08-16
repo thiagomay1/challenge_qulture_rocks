@@ -4,7 +4,7 @@ RSpec.describe "Employees", type: :request do
   describe "GET /index" do
     it "returns http success" do
       company = create(:company)
-      get "/companies/#{company.id}/employees"
+      get "/api/v1/companies/#{company.id}/employees"
       expect(response).to have_http_status(:success)
     end
   end
@@ -14,7 +14,7 @@ RSpec.describe "Employees", type: :request do
       company = create(:company)
       leader = create(:employee, company: company)
       subordinate = create(:employee, company: company)
-      put "/employees/#{leader.id}/subordinate", :params => {  :subordinate_id => subordinate.id } 
+      put "/api/v1/employees/#{leader.id}/subordinate", :params => {  :subordinate_id => subordinate.id } 
       expect(response).to have_http_status(:success)
     end
   end
@@ -22,7 +22,7 @@ RSpec.describe "Employees", type: :request do
   describe "POST /companies/:company_id/employees" do
     it "returns http success" do
       company = create(:company)
-      post "/companies/#{company.id}/employees", :params => { :name => Faker::Name.name, :email => Faker::Internet.email } 
+      post "/api/v1/companies/#{company.id}/employees", :params => { :name => Faker::Name.name, :email => Faker::Internet.email } 
       expect(response).to have_http_status(:success)
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe "Employees", type: :request do
     it "returns http success" do
       company = create(:company)
       employee = create(:employee, company: company)
-      get "/employees/#{employee.id}/peers"
+      get "/api/v1/employees/#{employee.id}/peers"
       expect(response).to have_http_status(:success)
     end
   end
@@ -41,7 +41,7 @@ RSpec.describe "Employees", type: :request do
     it "returns http success" do
       company = create(:company)
       employee = create(:employee, company: company)
-      get "/employees/#{employee.id}/subordinates"
+      get "/api/v1/employees/#{employee.id}/subordinates"
       expect(response).to have_http_status(:success)
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe "Employees", type: :request do
     it "returns http success" do
       company = create(:company)
       employee = create(:employee, company: company)
-      get "/employees/#{employee.id}/subordinates/second_tier"
+      get "/api/v1/employees/#{employee.id}/subordinates/second_tier"
       expect(response).to have_http_status(:success)
     end
   end
