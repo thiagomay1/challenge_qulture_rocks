@@ -1,7 +1,7 @@
 # Challenge Qulture Rocks
 
 ## Como rodar
-```shell
+```console
 $ docker-comṕose build
 $ docker-compose up
 $ docker-compose run web rake db:create db:migrate db:seed
@@ -10,17 +10,17 @@ $ docker-compose run web rake db:create db:migrate db:seed
 
 ### Listar as empresas do sistema
 ##### Request
-```request
+```http
 GET /api/v1/companies
 ```
 ###  Ver uma empresa
 ##### Request
-```request
+```http
 GET /api/v1/companies/:id
 ```
 ### Cadastrar uma empresa
 ##### Request
-```request
+```http
 POST /api/v1/companies
 ```
 ##### Atributos
@@ -30,17 +30,19 @@ POST /api/v1/companies
 }
 ```
 ##### Response
+```
 200 - Criado com sucesso
 422 - Parametros inválidos
+```
 
 ### Listar os colaboradores de uma empresa
 ##### Request
-```request
+```http
 GET /api/v1/companies/:company_id/employees
 ```
 ### Cadastrar um colaborador em uma empresa
 ##### Request
-```request
+```http
 POST /api/v1/companies/:company_id/employees
 ```
 ##### Atributos
@@ -51,21 +53,25 @@ POST /api/v1/companies/:company_id/employees
 }
 ```
 ##### Response
+```
 200 - Criado com sucesso
 422 - Parametros inválidos
+```
 
 ### Apagar um colaborador de uma empresa
 ##### Request
-```request
+```http
 DELETE /api/v1/companies/:company_id/employees/:id
 ```
 ##### Response
+```
 200 - Deletado com sucesso
 404 - Funcionário não encontrado na empresa
+```
 
 ### Associar um colaborador como gestor de outro usuário
 ##### Request
-```request
+```http
 PUT /api/v1/employees/:employee_id/subordinate
 ```
 ##### Atributos
@@ -75,24 +81,25 @@ PUT /api/v1/employees/:employee_id/subordinate
 }
 ```
 ##### Response
+```
 200 - Associação criada com sucesso
 400 - Associação circular não é permitida
 404 - Lider/liderado não encontrado
 409 - Colaboradores são de empresas diferentes
-
+```
 ###  Listar os pares de um colaborador
 ##### Request
-```request
+```http
 GET /api/v1/employees/:employee_id/peers
 ```
 ###  Listar os liderados diretos de um colaborador
 ##### Request
-```request
+```http
 GET /api/v1/employees/:employee_id/subordinates
 ```
 ###  Listar os liderados dos liderados de um colaborador
 ##### Request
-```request
+```http
 GET /api/v1/employees/:employee_id/subordinates/second_tier
 ```
 
